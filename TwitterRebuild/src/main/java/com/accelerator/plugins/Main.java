@@ -105,7 +105,8 @@ public class Main extends Plugin {
 
                         List<EmbedEntry> embedAndAttachmentList = (List)callFrame.getResult();
                         List<MessageEmbed> embeds = message.getEmbeds();
-			new Logger("TwitterRebuild").debug(embeds.toString());
+			new Logger("TwitterRebuild embeds").debug(embeds.toString());
+			new Logger("TwitterRebuild embedAndAttachmentList").debug(embedAndAttachmentList.toString());
                         if (embedAndAttachmentList.size() < 1 || embeds.size() < 1 || embedAndAttachmentList.size() == embeds.size()) return;
                         long guildID = embedAndAttachmentList.get(0).getGuildId();
 
