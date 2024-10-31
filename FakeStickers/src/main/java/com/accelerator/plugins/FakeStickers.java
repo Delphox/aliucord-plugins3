@@ -49,7 +49,7 @@ public class FakeStickers extends Plugin {
 				if (ReflectUtils.getField(param.args[0], "sendability") == StickerUtils.StickerSendability.SENDABLE) return;
 
 				var sticker = ((StickerItem) param.args[0]).getSticker();
-				var stickerformat = (sticker.b()==null) ? ".gif" : sticker.b();
+				var stickerformat = (sticker.b()=="") ? ".gif" : sticker.b();
 				
 				RestAPIParams.Message message = new RestAPIParams.Message(
 					"https://media.discordapp.net/stickers/"+sticker.d()+stickerformat+"?size=160",
