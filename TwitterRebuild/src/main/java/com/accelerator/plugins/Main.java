@@ -110,7 +110,7 @@ public class Main extends Plugin {
                         long guildID = embedAndAttachmentList.get(0).getGuildId();
 
                         EmbedEntry lastAddedEmbed = (EmbedEntry)embedAndAttachmentList.get(embedAndAttachmentList.size()-1);
-                        int embedIndex = lastAddedEmbed.component1()+1;
+                        int embedIndex = lastAddedEmbed.component1();
 
                         var embedColor = embeds.get(0).b() != null ? embeds.get(0).b() : null;
                         for (int i = 1; i < embeds.size(); i++) {
