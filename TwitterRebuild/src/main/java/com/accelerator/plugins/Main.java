@@ -105,15 +105,15 @@ public class Main extends Plugin {
 
                         List<EmbedEntry> embedAndAttachmentList = (List)callFrame.getResult();
                         List<MessageEmbed> embeds = message.getEmbeds();
-			new Logger("TwitterRebuild embeds").debug(embeds.toString());
-			new Logger("TwitterRebuild embedAndAttachmentList").debug(embedAndAttachmentList.toString());
-               //         if (embedAndAttachmentList.size() < 1 || embeds.size() < 1 || embedAndAttachmentList.size() == embeds.size()) return;
+
+                        if (embedAndAttachmentList.size() < 1 || embeds.size() < 2 || embedAndAttachmentList.size() == embeds.size()) return;
                         long guildID = embedAndAttachmentList.get(0).getGuildId();
+
                         EmbedEntry lastAddedEmbed = (EmbedEntry)embedAndAttachmentList.get(embedAndAttachmentList.size()-1);
-                         embedIndex = lastAddedEmbed.component1();
+                        int embedIndex = lastAddedEmbed.component1()+1;
 
                         var embedColor = embeds.get(0).b() != null ? embeds.get(0).b() : null;
-                        for ( i = 1; i <= embeds.size(); i++) {
+                        for (int i = 1; i < embeds.size(); i++) {
                             var embed = embeds.get(i);
                             if (embedColor != null) {
                                 try {
@@ -137,7 +137,7 @@ public class Main extends Plugin {
                     })
             );
         } catch (Exception e) {
-            e.prStackTrace();
+            e.printStackTrace();
         }
 
         if (settings.getBool("VideoEmbeds", true)) {
@@ -175,7 +175,7 @@ public class Main extends Plugin {
 
                                             con.setRequestProperty("Accept-Charset", "UTF-8");
                                             con.setDoOutput(true);
-                                             responseCode = con.getResponseCode();
+                                            int responseCode = con.getResponseCode();
                                             if(responseCode == 200) {
                                                 BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
                                                 String line;
@@ -193,7 +193,7 @@ public class Main extends Plugin {
                                                 if (json.has("video")) {
                                                     if (json.getJSONObject("video").has("poster")) poster = json.getJSONObject("video").getString("poster");
                                                     JSONArray a = json.getJSONObject("video").getJSONArray("variants");
-                                                    for ( i = 0; i < a.length(); i++) {
+                                                    for (int i = 0; i < a.length(); i++) {
                                                         JSONObject va = a.getJSONObject(i);
                                                         if(va.getString("type").equals("video/mp4")) videoURL = va.getString("src");
                                                     }
@@ -209,7 +209,7 @@ public class Main extends Plugin {
                                             }
                                         } catch (Exception e) {
                                             Utils.showToast("Failed to fix twitter video embed, message:\n"+e.getMessage());
-                                            e.prStackTrace();
+                                            e.printStackTrace();
                                         }
                                     }).start();
                                 }
@@ -217,14 +217,14 @@ public class Main extends Plugin {
                         })
                 );
             } catch (Exception e) {
-                e.prStackTrace();
+                e.printStackTrace();
             }
         }
     }
 
     private String addParameter(String URL, String name, String value) {
-         qpos = URL.indexOf('?');
-         hpos = URL.indexOf('#');
+        int qpos = URL.indexOf('?');
+        int hpos = URL.indexOf('#');
         char sep = qpos == -1 ? '?' : '&';
         String seg = sep + encodeUrl(name) + '=' + encodeUrl(value);
         return hpos == -1 ? URL + seg : URL.substring(0, hpos) + seg
