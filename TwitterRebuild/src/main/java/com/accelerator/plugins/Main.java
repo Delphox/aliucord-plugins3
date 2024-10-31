@@ -133,7 +133,7 @@ public class Main extends Plugin {
                                     (boolean)callFrame.args[5]
                             ));
                             embedIndex++;
-				new Logger("TwitterRebuild").debug("Added new embed to arrayList at position "+String.valueOf(embedIndex))+"Embed: "+embed.toString();
+				new Logger("TwitterRebuild").debug("Added new embed to arrayList at position "+String.valueOf(embedIndex)+"Embed: "+embed.toString());
                         }
                     })
             );
