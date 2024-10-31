@@ -109,12 +109,13 @@ public class Main extends Plugin {
 			new Logger("TwitterRebuild embedAndAttachmentList").debug(embedAndAttachmentList.toString());
                         if (embedAndAttachmentList.size() < 1 || embeds.size() < 1 || embedAndAttachmentList.size() == embeds.size()) return;
                         long guildID = embedAndAttachmentList.get(0).getGuildId();
-
+			new Logger("TwitterRebuild guildID").debug(guildID.toString());
                         EmbedEntry lastAddedEmbed = (EmbedEntry)embedAndAttachmentList.get(embedAndAttachmentList.size()-1);
                         int embedIndex = lastAddedEmbed.component1();
 
                         var embedColor = embeds.get(0).b() != null ? embeds.get(0).b() : null;
                         for (int i = 1; i <= embeds.size(); i++) {
+				new Logger("TwitterRebuild embedIndex iteration"+i).debug(embedIndex.toString());
                             var embed = embeds.get(i);
                             if (embedColor != null) {
                                 try {
