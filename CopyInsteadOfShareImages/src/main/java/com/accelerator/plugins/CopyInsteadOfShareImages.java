@@ -52,7 +52,7 @@ public class CopyInsteadOfShareImages extends Plugin {
         public void onViewCreated(View view, Bundle bundle) {
             super.onViewCreated(view, bundle);
 
-            addView(createCheckedSetting(view.getContext(), "Replace media.discordapp.net with cdn.discordapp.com", "replaceMediaWithCDN", false));
+            addView(createCheckedSetting(view.getContext(), "Replace media.discordapp.net with cdn.discordapp.com", "replaceMediaWithCDN", true));
         }
 
         private CheckedSetting createCheckedSetting(Context ctx, String title, String setting, boolean checked) {
@@ -115,8 +115,8 @@ public class CopyInsteadOfShareImages extends Plugin {
 				
 				//Better one
 				String imageUri = ((AppFragment)callFrame.thisObject).getMostRecentIntent().getStringExtra("INTENT_MEDIA_URL");
-				if (settings.getBool("replaceMediaWithCDN", false))
-					imageUri = imageUri.replace("media.discordapp.net","cdn.discordapp.com");
+				if (settings.getBool("replaceMediaWithCDN", true))
+					imageUri = imageUri.replace("media.discordapp.net/attachments","cdn.discordapp.com/attachments");
 				
 				//Because I can't make a string final after it's already been created...
 				final String imageUriFinal = new String(imageUri);
