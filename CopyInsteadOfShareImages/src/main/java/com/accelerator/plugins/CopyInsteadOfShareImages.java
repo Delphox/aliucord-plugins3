@@ -52,7 +52,7 @@ public class CopyInsteadOfShareImages extends Plugin {
         public void onViewCreated(View view, Bundle bundle) {
             super.onViewCreated(view, bundle);
 
-            addView(createCheckedSetting(view.getContext(), "Replace media.discordapp.net with cdn.discordapp.com", "replaceMediaWithCDN", true));
+            addView(createCheckedSetting(view.getContext(), "Replace media.discordapp.net with cdn.discordapp.com", "replaceMediaWithCDN", false));
         }
 
         private CheckedSetting createCheckedSetting(Context ctx, String title, String setting, boolean checked) {
