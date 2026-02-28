@@ -1,39 +1,43 @@
 name: Build
 
+concurrency:
+  group: "build"
+  cancel-in-progress: true
+
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
 
 jobs:
   build:
+    timeout-minutes: 10
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v6
         with:
-          path: "src"
+          path: 'src'
 
       - name: Checkout builds
-        uses: actions/checkout@master
+        uses: actions/checkout@v6
         with:
-          ref: "builds"
-          path: "builds"
+          ref: 'builds'
+          path: 'builds'
 
-      - name: Checkout Aliucord
-        uses: actions/checkout@master
+      - name: Setup JDK 11
+        uses: actions/setup-java@v5
         with:
-          repository: "Aliucord/Aliucord"
-          path: "repo"
-
-      - name: Setup JDK 17
-        uses: actions/setup-java@v2
-        with:
-          distribution: "temurin"
-          java-version: 17
+          java-version: 11
+          distribution: zulu
+          cache: gradle
 
       - name: Setup Android SDK
-        uses: android-actions/setup-android@v2
+        uses: android-actions/setup-android@v3
+        with:
+          cmdline-tools-version: 9862592 # 10.0 is the last version working with JDK 11
+          log-accepted-android-sdk-licenses: false
 
       - name: Build Plugins
         run: |
