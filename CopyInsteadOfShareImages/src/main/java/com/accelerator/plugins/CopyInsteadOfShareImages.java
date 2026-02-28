@@ -114,7 +114,7 @@ public class CopyInsteadOfShareImages extends Plugin {
 				//var imageUri = ReflectUtils.getField(callFrame.thisObject,"imageUri").toString();
 				
 				//Better one
-				String imageUri = ((AppFragment)callFrame.thisObject).getMostRecentIntent().getStringExtra("INTENT_MEDIA_URL");
+				String imageUri = ((AppFragment)callFrame.thisObject).getMostRecentIntent().getStringExtra("INTENT_IMAGE_URL");
 				if (settings.getBool("replaceMediaWithCDN", true))
 					imageUri = imageUri.replace("media.discordapp.net/attachments","cdn.discordapp.com/attachments");
 				
