@@ -89,11 +89,13 @@ public class MediaPickerPatcher extends Plugin {
 				pickerButton.setOnClickListener( new View.OnClickListener() {
 					@Override
 					public void onClick (View v) {
-						Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
+						Intent intent;
 						if (settings.getBool("MMP_AllowAllFiles", false))
+							intent = new Intent(Intent.ACTION_GET_CONTENT);
 							intent.setType("*/*");
 						else
 						{
+							intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.INTERNAL_CONTENT_URI);
 							intent.setType("image/* video/*");
 							intent.putExtra(Intent.EXTRA_MIME_TYPES, new String[] {"image/*", "video/*"});
 						}
